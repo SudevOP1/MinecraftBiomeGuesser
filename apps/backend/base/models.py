@@ -1,3 +1,6 @@
 from django.db import models
 
-# Create your models here.
+class Player(models.Model):
+    username = models.CharField(max_length=50, primary_key=True)
+    total_score = models.IntegerField(default=0)
+    total_tests = models.IntegerField(default=0)

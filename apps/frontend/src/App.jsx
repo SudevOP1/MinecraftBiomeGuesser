@@ -1,7 +1,15 @@
+import { Route, Router, Routes } from "react-router-dom";
+import Test from "./pages/Test";
 
 function App() {
   return (
-    <h1 className="bg-yellow-500">Hello</h1>
+    <Router>
+      <Routes>
+        <Route path="/leaderboards" element={<h1>yo</h1>} />
+        <Route path="/quiz" element={<Test />} />
+        <Route path="/result" element={<h1>yo</h1>} />
+      </Routes>
+    </Router>
   )
 }
 
