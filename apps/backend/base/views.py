@@ -4,6 +4,8 @@ from django.conf import settings
 import os, random, json
 from .models import *
 
+num_qstns, num_optns = 10, 4
+
 def get_biomes():
     return os.listdir(os.path.join(settings.MEDIA_ROOT, "data"))
 
@@ -18,7 +20,6 @@ def get_test(request):
     if request.method == "GET":
         try:
             test = []
-            num_qstns, num_optns = 10, 4
             biomes = get_biomes()
             f_biomes = get_formatted_biomes()
             for i in range(num_qstns):
@@ -125,7 +126,7 @@ def get_leaderboard(request):
                     "username": player.username,
                     "total_score": player.total_score,
                     "total_tests": player.total_tests,
-                    "accuracy": player.total_score / (player.total_tests * 10),
+                    "accuracy": player.total_score / (player.total_tests * num_qstns),
                 }
                 for player in Player.objects.all()
                 if player.total_tests > 0

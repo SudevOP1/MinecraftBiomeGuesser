@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Test = () => {
+const Quiz = () => {
   let [username, setUsername] = useState("");
 
   return (
@@ -17,4 +17,4 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default Quiz;

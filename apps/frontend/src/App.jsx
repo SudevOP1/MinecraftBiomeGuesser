@@ -1,16 +1,18 @@
-import { Route, Router, Routes } from "react-router-dom";
-import Test from "./pages/Test";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import MainPage from "./pages/MainPage";
+import Quiz from "./pages/Quiz";
+import Result from "./pages/Result";
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
-        <Route path="/leaderboards" element={<h1>yo</h1>} />
-        <Route path="/quiz" element={<Test />} />
-        <Route path="/result" element={<h1>yo</h1>} />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/quiz" element={<Quiz />} />
+        <Route path="/result" element={<Result />} />
       </Routes>
-    </Router>
-  )
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

@@ -7,6 +7,17 @@
   <title>Vite + React</title>
   <style>
     @import "tailwindcss";
+    @font-face {
+      font-family: Minecraft;
+      src: url("../src/assets/fonts/Minecraft.ttf");
+    }
+    @theme {
+      --font-minecraft: Minecraft, consolas
+    }
+    .font-minecraft {
+      font-family: var(--font-minecraft);
+      letter-spacing: 0.1em;
+    }
   </style>
 </head>
 <body>
