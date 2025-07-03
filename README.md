@@ -1,9 +1,8 @@
-https://www.kaggle.com/datasets/pr1m3r/minecraft-dimensions-screenshots
-
-
 # Minecraft Biome Guesser
 
 In this project, I developed a Minecraft Biome Guesser web app that allows users to identify biomes from blurred images in a quiz format. I implemented score tracking, leaderboard integration, and backend communication using React (with Tailwind CSS) for the frontend and Django for the backend API.
+<br>
+[Dataset URL](https://www.kaggle.com/datasets/pr1m3r/minecraft-dimensions-screenshots)
 <br>
 
 ## 💡 What it does
