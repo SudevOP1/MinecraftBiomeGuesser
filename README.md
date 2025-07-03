@@ -15,6 +15,7 @@ In this project, I developed a Minecraft Biome Guesser web app that allows users
 ## 🛠️ Tech Stacks
 - **Frontend**: `React`, `TailwindCSS`
 - **Backend**: `Django`
+- **Libraries**: `pillow`
 <br>
 
 ## ✨ Website Design
