@@ -6,4 +6,4 @@ class Player(models.Model):
     total_tests = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.username
+        return f"{self.username} {self.total_score}"

@@ -1,6 +1,8 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from django.db import IntegrityError
 from django.conf import settings
+
 import os, random, json
 from .models import *
 
@@ -50,13 +52,12 @@ def get_test(request):
         except Exception as e:
             return JsonResponse({
                 "success": False,
-                "message": "something went wrong",
                 "error": str(e),
             }, status=400)
     else:
         return JsonResponse({
             "success": False,
-            "message": "only GET requests allowed",
+            "error": "only GET requests allowed",
         }, status=405)
 
 @csrf_exempt
@@ -65,6 +66,7 @@ def create_username(request):
         try:
             body = json.loads(request.body)
             username = body["username"]
+            
             player_obj = Player.objects.create(username=username)
             return JsonResponse({
                 "success": True,
@@ -74,16 +76,21 @@ def create_username(request):
                     "total_tests": player_obj.total_tests,
                 }
             }, status=200)
+            
+        except IntegrityError:
+            return JsonResponse({
+                "success": False,
+                "error": "username already exists",
+            }, status=400)
         except Exception as e:
             return JsonResponse({
                 "success": False,
-                "message": "something went wrong",
                 "error": str(e),
             }, status=400)
     else:
         return JsonResponse({
             "success": False,
-            "message": "only POST requests allowed",
+            "error": "only POST requests allowed",
         }, status=405)
 
 @csrf_exempt
@@ -109,13 +116,12 @@ def submit_score(request):
         except Exception as e:
             return JsonResponse({
                 "success": False,
-                "message": "something went wrong",
                 "error": str(e),
             }, status=400)
     else:
         return JsonResponse({
             "success": False,
-            "message": "only POST requests allowed",
+            "error": "only POST requests allowed",
         }, status=405)
 
 @csrf_exempt
@@ -126,11 +132,16 @@ def get_leaderboard(request):
                     "username": player.username,
                     "total_score": player.total_score,
                     "total_tests": player.total_tests,
-                    "accuracy": player.total_score / (player.total_tests * num_qstns),
+                    "accuracy": player.total_score / (player.total_tests),
                 }
                 for player in Player.objects.all()
                 if player.total_tests > 0
             ]
+            leaderboard = sorted(
+                leaderboard,
+                key=lambda x: x["total_score"],
+                reverse=True
+            )
             return JsonResponse({
                 "success": True,
                 "leaderboard": leaderboard,
@@ -138,12 +149,11 @@ def get_leaderboard(request):
         except Exception as e:
             return JsonResponse({
                 "success": False,
-                "message": "something went wrong",
                 "error": str(e),
             }, status=400)
     else:
         return JsonResponse({
             "success": False,
-            "message": "only GET requests allowed",
+            "error": "only GET requests allowed",
         }, status=405)
 
